@@ -40,4 +40,8 @@ public class ReaderService {
 
         return readerRepository.save(reader);
     }
+
+    public List<Reader> searchReaders(String keyword) {
+        return readerRepository.findByNameContainingIgnoreCase(keyword);
+    }
 }

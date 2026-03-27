@@ -30,4 +30,6 @@ public class Loan {
     private LocalDate issueDate;
 
     private LocalDate returnDate;
+
+
 }

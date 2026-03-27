@@ -1,0 +1,17 @@
+<form action="/readers/search" method="get">
+    <input type="text" name="keyword" placeholder="Search readers...">
+    <button type="submit">Search</button>
+</form>
+
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<h1>Readers</h1>
+
+<a href="/readers/new">Add Reader</a>
+
+<ul>
+    <li th:each="r : ${readers}">
+        <span th:text="${r.name}"></span>
+        <a th:href="@{/readers/delete/{id}(id=${r.id})}">Delete</a>
+    </li>
+</ul>

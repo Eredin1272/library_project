@@ -1,0 +1,29 @@
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<h1>Loans</h1>
+
+<a href="/loans/issue">Issue Book</a>
+
+<table border="1">
+    <tr>
+        <th>Book</th>
+        <th>Reader</th>
+        <th>Issue Date</th>
+        <th>Return Date</th>
+        <th>Action</th>
+    </tr>
+
+    <tr th:each="loan : ${loans}">
+        <td th:text="${loan.book.title}"></td>
+        <td th:text="${loan.reader.name}"></td>
+        <td th:text="${loan.issueDate}"></td>
+        <td th:text="${loan.returnDate}"></td>
+
+        <td>
+            <a th:if="${loan.returnDate == null}"
+               th:href="@{/loans/return/{id}(id=${loan.id})}">
+                Return
+            </a>
+        </td>
+    </tr>
+</table>

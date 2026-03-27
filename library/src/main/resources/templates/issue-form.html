@@ -1,0 +1,23 @@
+<h1>Issue Book</h1>
+
+<form action="/loans/issue" method="post">
+
+    <label>Book:</label>
+    <select name="bookId">
+        <option th:each="b : ${books}"
+                th:value="${b.id}"
+                th:text="${b.title}">
+        </option>
+    </select>
+
+    <label>Reader:</label>
+    <select name="readerId">
+        <option th:each="r : ${readers}"
+                th:value="${r.id}"
+                th:text="${r.name}">
+        </option>
+    </select>
+
+    <button type="submit">Issue</button>
+
+</form>

@@ -1,0 +1,16 @@
+<form th:action="@{/readers}" th:object="${reader}" method="post">
+
+    <input type="text" th:field="*{name}" placeholder="Name"/>
+    <div th:if="${#fields.hasErrors('name')}"
+         th:errors="*{name}"></div>
+
+    <input type="text" th:field="*{email}" placeholder="Email"/>
+    <div th:if="${#fields.hasErrors('email')}"
+         th:errors="*{email}"></div>
+    <input type="text" th:field="*{phone}" placeholder="Phone"/>
+    <div th:if="${#fields.hasErrors('phone')}"
+         th:errors="*{phone}"></div>
+
+    <button type="submit">Save</button>
+
+</form>

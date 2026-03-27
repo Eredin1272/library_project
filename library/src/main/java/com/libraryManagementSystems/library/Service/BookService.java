@@ -21,8 +21,8 @@ public class BookService {
     }
 
     // Найти книгу по ID
-    public Book getBookById(Long id) {
-        return bookRepository.findById(id).orElse(null);
+    public Optional<Book> getBookById(Long id) {
+        return bookRepository.findById(id);
     }
 
     public Book saveBook(Book book) {
@@ -33,7 +33,7 @@ public class BookService {
          bookRepository.deleteById(id);
     }
 
-    public Book updateBook (Long id, Book updateBook) {
+    public Book updateBook(Long id, Book updateBook) {
         Book book = bookRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Book is not found"));
 
@@ -43,4 +43,10 @@ public class BookService {
 
         return bookRepository.save(book);
     }
+
+    public List<Book> searchBooks(String keyword) {
+        return bookRepository
+                .findByTitleContainingIgnoreCaseOrAuthorContainingIgnoreCase(keyword, keyword);
+    }
+
 }
