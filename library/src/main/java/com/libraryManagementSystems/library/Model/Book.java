@@ -3,6 +3,7 @@ package com.libraryManagementSystems.library.Model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
+import org.hibernate.annotations.SQLDelete;
 
 @Entity
 @Table(name = "Books")

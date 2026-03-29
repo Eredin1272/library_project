@@ -15,4 +15,9 @@ public interface LoanRepository extends JpaRepository <Loan, Long> {
     // Найти все активные выдачи читателя
     List<Loan> findByReaderIdAndReturnDateIsNull(Long readerId);
 
+    // Удалить все выдачи, связанные с конкретной книгой
+    void deleteByBookId(Long bookId);
+
+    // Удалить все выдачи, связанные с конкретным читателем
+    void deleteByReaderId(Long readerId);
 }

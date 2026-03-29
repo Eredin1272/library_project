@@ -1,8 +1,10 @@
 package com.libraryManagementSystems.library.Service;
 
 import com.libraryManagementSystems.library.Model.Reader;
+import com.libraryManagementSystems.library.Repository.LoanRepository;
 import com.libraryManagementSystems.library.Repository.ReaderRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,6 +14,9 @@ import java.util.List;
 public class ReaderService {
 
     private final ReaderRepository readerRepository;
+
+    @Autowired
+    private LoanRepository loanRepository;
 
     public List<Reader> getAllReaders() {
         return readerRepository.findAll();
@@ -26,6 +31,7 @@ public class ReaderService {
     }
 
     public void deleteReader(Long id) {
+        loanRepository.deleteByReaderId(id);
         readerRepository.deleteById(id);
     }
 
