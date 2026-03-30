@@ -56,4 +56,9 @@ public class BookService {
                 .findByTitleContainingIgnoreCaseOrAuthorContainingIgnoreCase(keyword, keyword);
     }
 
+    public List<Book> getAvailableBooks() {
+        return bookRepository.findByAvailableTrue();
+    }
+
+
 }

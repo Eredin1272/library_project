@@ -1,23 +1,32 @@
 <h1>Issue Book</h1>
 
-<form action="/loans/issue" method="post">
+<form th:action="@{/loans/issue}" method="post">
 
-    <label>Book:</label>
-    <select name="bookId">
-        <option th:each="b : ${books}"
-                th:value="${b.id}"
-                th:text="${b.title}">
+    <div th:if="${error}" style="color:red;">
+        <p th:text="${error}"></p>
+    </div>
+
+    <div th:if="${#lists.isEmpty(books)}" class="alert alert-warning" >
+        Нет доступных книг
+    </div>
+
+    <label>Книга:</label>
+    <select name="bookId" class="form-select" required>
+        <option value="">-- Выберите книгу --</option>
+        <option th:each="book : ${books}"
+                th:value="${book.id}"
+                th:text="${book.title}">
         </option>
     </select>
 
-    <label>Reader:</label>
+    <label>Читатель:</label>
     <select name="readerId">
-        <option th:each="r : ${readers}"
-                th:value="${r.id}"
-                th:text="${r.name}">
+        <option value="">-- Выберите читателя --</option>
+        <option th:each="reader : ${readers}"
+                th:value="${reader.id}"
+                th:text="${reader.name}">
         </option>
     </select>
 
     <button type="submit">Issue</button>
-
 </form>
