@@ -10,8 +10,8 @@
 <a href="/readers/new">Add Reader</a>
 
 <ul>
-    <li th:each="r : ${readers}">
-        <span th:text="${r.name}"></span>
+    <li th:each="reader : ${readers}">
+        <span th:text="${reader.name}"></span>
         <a th:href="@{/readers/delete/{id}(id=${reader.id})}"
            class="btn btn-danger"
            onclick="return confirm('Вы уверены, что хотите удалить этого читателя? История выдач будет удалена.');">

@@ -32,7 +32,11 @@ public class LoanService {
         Reader reader = readerRepository.findById(readerId)
                 .orElseThrow(() -> new RuntimeException("Читатель не найден!"));
 
+        List<Loan> readerLoans = loanRepository.findByReaderIdAndReturnDateIsNull(readerId);
 
+        if (readerLoans.size() >= 3) {
+            throw new RuntimeException("У читателя уже 3 книги");
+        }
         book.setAvailable(false);
         bookRepository.save(book);
 

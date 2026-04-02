@@ -27,16 +27,33 @@ public class LoanController {
     // форма выдачи
     @GetMapping("/issue")
     public String issueForm(Model model) {
-        model.addAttribute("books", bookService.getAllBooks());
+        model.addAttribute("books", bookService.getAvailableBooks());
         model.addAttribute("readers", readerService.getAllReaders());
         return "issue-form";
     }
 
     // выдать книгу
     @PostMapping("/issue")
-    public String issueBook(@RequestParam Long bookId,
-                            @RequestParam Long readerId) {
-        loanService.issueBook(bookId, readerId);
+    public String issueBook(@RequestParam(required = false) Long bookId,
+                            @RequestParam(required = false) Long readerId,
+                            Model model) {
+
+        if (bookId == null || readerId == null) {
+            model.addAttribute("error", "Выберите книгу и читателя");
+            model.addAttribute("books", bookService.getAvailableBooks());
+            model.addAttribute("readers", readerService.getAllReaders());
+            return "issue-form";
+        }
+
+        try {
+            loanService.issueBook(bookId, readerId);
+        } catch (RuntimeException e) {
+            model.addAttribute("error", e.getMessage());
+            model.addAttribute("books", bookService.getAvailableBooks());
+            model.addAttribute("readers", readerService.getAllReaders());
+            return "issue-form";
+        }
+
         return "redirect:/loans";
     }
 
