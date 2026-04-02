@@ -1,5 +1,6 @@
 package com.libraryManagementSystems.library.Controller;
 
+import com.libraryManagementSystems.library.Model.Loan;
 import com.libraryManagementSystems.library.Service.BookService;
 import com.libraryManagementSystems.library.Service.LoanService;
 import com.libraryManagementSystems.library.Service.ReaderService;
@@ -7,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -62,5 +65,22 @@ public class LoanController {
     public String returnBook(@PathVariable Long id) {
         loanService.returnBook(id);
         return "redirect:/loans";
+    }
+
+    @GetMapping("/loans")
+    public String getLoans(@RequestParam(required = false) String keyword, Model model) {
+
+        List<Loan> loans;
+
+        if (keyword != null && !keyword.trim().isEmpty()) {
+            loans = loanService.searchLoan(keyword);
+        } else {
+            loans = loanService.getAllLoans();
+        }
+
+        model.addAttribute("loans", loans);
+        model.addAttribute("keyword", keyword);
+
+        return "loans";
     }
 }

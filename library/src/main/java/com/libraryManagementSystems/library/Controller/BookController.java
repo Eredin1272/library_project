@@ -49,6 +49,18 @@ public class BookController {
         model.addAttribute("book", book);
         return "book-form";
     }
+    @PostMapping("/update/{id}")
+    public String updateBook(@PathVariable Long id,
+                             @Valid @ModelAttribute Book book,
+                             BindingResult result) {
+
+        if (result.hasErrors()) {
+            return "book-form";
+        }
+
+        bookService.updateBook(id, book);
+        return "redirect:/books";
+    }
 
     //  удалить
     @GetMapping("/delete/{id}")
