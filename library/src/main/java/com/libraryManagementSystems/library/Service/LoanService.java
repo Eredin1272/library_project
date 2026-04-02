@@ -66,18 +66,21 @@ public class LoanService {
         return loanRepository.save(loan);
     }
 
-    // Список всех активных выдач книги
-    public List<Loan> getActiveLoansBook(Long bookId) {
-        return loanRepository.findByBookIdAndReturnDateIsNull(bookId);
-    }
-
-    // Список всех активных выдач читателя
-    public List<Loan> getActiveLoansByReader(Long readerId) {
-        return loanRepository.findByReaderIdAndReturnDateIsNull(readerId);
-    }
-
     // Все выдачи
     public List<Loan> getAllLoans() {
         return loanRepository.findAll();
+    }
+
+    // Поиск выдачи
+    public List<Loan> searchLoan(String keyword) {
+
+        if (keyword == null || keyword.trim().isEmpty()) {
+            return loanRepository.findAll();
+        }
+
+        return loanRepository
+                .findByBook_TitleContainingIgnoreCaseOrReader_NameContainingIgnoreCase(
+                        keyword.trim(), keyword.trim()
+                );
     }
 }
