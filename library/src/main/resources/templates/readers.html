@@ -1,8 +1,12 @@
+<!DOCTYPE html>
+<html>
 <head>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <title>Readers</title>
 </head>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<body>
 <div th:replace="fragments/navbar :: navbar"></div>
 
 
@@ -40,21 +44,31 @@
         <tbody>
         <tr th:each="reader, iterStat : ${readers}">
             <td th:text="${iterStat.count}"></td>
-
             <td th:text="${reader.name}"></td>
             <td th:text="${reader.email}"></td>
             <td th:text="${reader.phone}"></td>
 
-            <td class="d-flex gap-2">
-                <a th:href="@{/readers/delete/{id}(id=${reader.id})}"
-                   class="btn btn-sm btn-danger"
-                   onclick="return confirm('Удалить читателя? История выдач тоже удалится');">
+            <td>
+                <a th:href="@{/readers/edit/{id}(id=${reader.id})}"
+                   class="btn btn-sm btn-warning">
+                    Edit
+                </a>
+                <a th:if="${!loanService.hasActiveLoans(reader.id)}"
+                   th:href="@{/readers/delete/{id}(id=${reader.id})}"
+                   class="btn btn-danger btn-sm"
+                   onclick="return confirm('Вы уверены?');">
                     Delete
                 </a>
+
+                <span th:if="${loanService.hasActiveLoans(reader.id)}"
+                      class="text-muted">
+        Есть книги
+    </span>
             </td>
         </tr>
         </tbody>
 
     </table>
-
 </div>
+</body>
+</html>
