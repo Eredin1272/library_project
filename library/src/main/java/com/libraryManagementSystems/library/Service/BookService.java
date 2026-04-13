@@ -4,6 +4,7 @@ package com.libraryManagementSystems.library.Service;
 import com.libraryManagementSystems.library.Model.Book;
 import com.libraryManagementSystems.library.Repository.BookRepository;
 import com.libraryManagementSystems.library.Repository.LoanRepository;
+import com.libraryManagementSystems.library.exception.BookNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,8 +27,9 @@ public class BookService {
     }
 
     // Найти книгу по ID
-    public Optional<Book> getBookById(Long id) {
-        return bookRepository.findById(id);
+    public Book  getBookById(Long id) {
+        return bookRepository.findById(id)
+                .orElseThrow(() -> new BookNotFoundException("Книга не найдена!"));
     }
 
     public Book saveBook(Book book) {

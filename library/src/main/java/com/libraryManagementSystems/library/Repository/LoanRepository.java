@@ -10,9 +10,6 @@ import java.util.List;
 @Repository
 public interface LoanRepository extends JpaRepository <Loan, Long> {
 
-    // Найти все активные выдачи книги
-    List<Loan> findByBookIdAndReturnDateIsNull(Long bookId);
-
 
     List<Loan> findByReaderIdAndReturnDateIsNull(Long readerId);
 

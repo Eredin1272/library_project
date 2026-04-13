@@ -44,8 +44,7 @@ public class BookController {
     //  редактирование
     @GetMapping("/edit/{id}")
     public String editBook(@PathVariable Long id, Model model) {
-        Book book = bookService.getBookById(id)
-                .orElseThrow(() -> new RuntimeException("Книга не найдена"));
+        Book book = bookService.getBookById(id);
         model.addAttribute("book", book);
         return "book-form";
     }

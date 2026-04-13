@@ -32,11 +32,6 @@
 <!--        <a href="/loans" class="btn btn-outline-secondary">Reset</a>-->
 <!--    </form>-->
 
-    <form action="/loans" method="get">
-        <input name="keyword">
-        <button type="submit">GO</button>
-    </form>
-
     <!-- Если пусто -->
     <div th:if="${#lists.isEmpty(loans)}" class="alert alert-warning">
         На данный момент журнал учёта книг пуст
