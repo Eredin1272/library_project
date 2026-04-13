@@ -12,57 +12,47 @@
 
 <div class="container mt-4">
 
-    <h1>Add Reader</h1>
+    <h1 th:text="${reader.id == null ? 'Add Reader' : 'Edit Reader'}">Add Reader</h1>
 
-    <form th:action="@{/readers}" th:object="${reader}" method="post" class="mt-4">
+    <form th:action="${reader.id == null ? '/readers' : '/readers/update/' + reader.id}"
+          th:object="${reader}"
+          method="post"
+          class="mt-4">
 
-        <!-- Name -->
+        <input type="hidden" th:field="*{id}">
+
         <div class="mb-3">
             <label class="form-label">Name</label>
             <input type="text" th:field="*{name}"
                    class="form-control"
                    placeholder="Enter reader name"
                    th:classappend="${#fields.hasErrors('name')} ? 'is-invalid'">
-            <div class="invalid-feedback"
-                 th:if="${#fields.hasErrors('name')}"
-                 th:errors="*{name}">
-            </div>
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
         </div>
 
-        <!-- Email -->
         <div class="mb-3">
             <label class="form-label">Email</label>
             <input type="email" th:field="*{email}"
                    class="form-control"
                    placeholder="Enter email"
                    th:classappend="${#fields.hasErrors('email')} ? 'is-invalid'">
-            <div class="invalid-feedback"
-                 th:if="${#fields.hasErrors('email')}"
-                 th:errors="*{email}">
-            </div>
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
         </div>
 
-        <!-- Phone -->
         <div class="mb-3">
             <label class="form-label">Phone</label>
             <input type="text" th:field="*{phone}"
                    class="form-control"
                    placeholder="Enter phone number"
                    th:classappend="${#fields.hasErrors('phone')} ? 'is-invalid'">
-            <div class="invalid-feedback"
-                 th:if="${#fields.hasErrors('phone')}"
-                 th:errors="*{phone}">
-            </div>
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></div>
         </div>
 
-        <!-- Buttons -->
         <div class="d-flex gap-2">
             <button type="submit" class="btn btn-success">Save</button>
             <a href="/readers" class="btn btn-secondary">Cancel</a>
         </div>
-
     </form>
-
 </div>
 </body>
 </html>

@@ -44,7 +44,6 @@
         <tbody>
         <tr th:each="book, iterStat : ${books}">
             <td th:text="${iterStat.count}"></td>
-
             <td th:text="${book.title}"></td>
             <td th:text="${book.author}"></td>
             <td th:text="${book.isbn}"></td>

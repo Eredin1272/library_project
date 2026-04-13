@@ -6,6 +6,7 @@ import com.libraryManagementSystems.library.Repository.ReaderRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -31,7 +32,13 @@ public class ReaderService {
         return readerRepository.save(reader);
     }
 
+    @Transactional
     public void deleteReader(Long id) {
+
+        if (!loanRepository.findByReaderIdAndReturnDateIsNull(id).isEmpty()) {
+            throw new RuntimeException("Нельзя удалить читателя с книгами");
+        }
+
         loanRepository.deleteByReaderId(id);
         readerRepository.deleteById(id);
     }

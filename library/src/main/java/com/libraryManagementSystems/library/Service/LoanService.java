@@ -35,7 +35,7 @@ public class LoanService {
         List<Loan> readerLoans = loanRepository.findByReaderIdAndReturnDateIsNull(readerId);
 
         if (readerLoans.size() >= 3) {
-            throw new RuntimeException("У читателя уже 3 книги");
+            throw new RuntimeException("Читатель свой достиг максимум выдачи - 3 книги!");
         }
         book.setAvailable(false);
         bookRepository.save(book);
@@ -71,16 +71,22 @@ public class LoanService {
         return loanRepository.findAll();
     }
 
-    // Поиск выдачи
-    public List<Loan> searchLoan(String keyword) {
-
-        if (keyword == null || keyword.trim().isEmpty()) {
-            return loanRepository.findAll();
-        }
-
-        return loanRepository
-                .findByBook_TitleContainingIgnoreCaseOrReader_NameContainingIgnoreCase(
-                        keyword.trim(), keyword.trim()
-                );
+    public boolean hasActiveLoans(Long readerId) {
+        return !loanRepository
+                .findByReaderIdAndReturnDateIsNull(readerId)
+                .isEmpty();
     }
+
+    // Поиск выдачи
+//    public List<Loan> searchLoan(String keyword) {
+//
+//        if (keyword == null || keyword.trim().isEmpty()) {
+//            return loanRepository.findAll();
+//        }
+//
+//        return loanRepository
+//                .findByBook_TitleContainingIgnoreCaseOrReader_NameContainingIgnoreCase(
+//                        keyword.trim(), keyword.trim()
+//                );
+//    }
 }
