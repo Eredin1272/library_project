@@ -12,31 +12,6 @@
 
     <a href="/loans/issue" class="btn btn-primary mb-3">+ Issue Book</a>
 
-<!--    &lt;!&ndash; Поиск &ndash;&gt;-->
-<!--    <form th:action="@{/loans}" method="get" class="mb-3 d-flex gap-2">-->
-<!--        <input type="text" name="keyword" th:value="${keyword}"-->
-<!--               class="form-control" placeholder="Search loans...">-->
-
-<!--        <div class="form-check">-->
-<!--            <input class="form-check-input"-->
-<!--                   type="checkbox"-->
-<!--                   name="activeOnly"-->
-<!--                   value="true"-->
-<!--                   th:checked="${activeOnly}">-->
-<!--            <label class="form-check-label">-->
-<!--                Только активные-->
-<!--            </label>-->
-<!--        </div>-->
-
-<!--        <button type="submit" onclick="alert('clicked')">Search</button>-->
-<!--        <a href="/loans" class="btn btn-outline-secondary">Reset</a>-->
-<!--    </form>-->
-
-    <form action="/loans" method="get">
-        <input name="keyword">
-        <button type="submit">GO</button>
-    </form>
-
     <!-- Если пусто -->
     <div th:if="${#lists.isEmpty(loans)}" class="alert alert-warning">
         На данный момент журнал учёта книг пуст

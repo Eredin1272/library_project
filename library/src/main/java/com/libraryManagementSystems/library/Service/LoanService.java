@@ -77,16 +77,4 @@ public class LoanService {
                 .isEmpty();
     }
 
-    // Поиск выдачи
-//    public List<Loan> searchLoan(String keyword) {
-//
-//        if (keyword == null || keyword.trim().isEmpty()) {
-//            return loanRepository.findAll();
-//        }
-//
-//        return loanRepository
-//                .findByBook_TitleContainingIgnoreCaseOrReader_NameContainingIgnoreCase(
-//                        keyword.trim(), keyword.trim()
-//                );
-//    }
 }
