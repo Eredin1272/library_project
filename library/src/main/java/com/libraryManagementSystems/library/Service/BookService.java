@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -31,12 +30,11 @@ public class BookService {
         return bookRepository.findById(id)
                 .orElseThrow(() -> new BookNotFoundException("Книга не найдена!"));
     }
-
     public Book saveBook(Book book) {
         return bookRepository.save(book);
     }
 
-    @Transactional
+    @Transactional // Все или ничего
     public void deleteBook(Long id) {
         loanRepository.deleteByBookId(id);
         bookRepository.deleteById(id);
@@ -44,7 +42,7 @@ public class BookService {
 
     public Book updateBook(Long id, Book updateBook) {
         Book book = bookRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Book is not found"));
+                .orElseThrow(() -> new BookNotFoundException("Книга не найдена!"));
 
         book.setTitle(updateBook.getTitle());
         book.setAuthor(updateBook.getAuthor());

@@ -18,23 +18,22 @@ public class Book {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "Title is required")
-    @Pattern(regexp = "^[a-zA-Zа-яА-ЯёЁ\\s]+$", message = "Title must contain only letters")
+    @NotBlank(message = "Название книги обязательно!")
+    @Pattern(regexp = "^[a-zA-Zа-яА-ЯёЁ\\s]+$", message = "Название книги может содержать только буквы и пробелы")
     @Column(nullable = false, name = "title")
     private String title;
 
-    @NotBlank(message = "Author is required")
-    @Pattern(regexp = "^[a-zA-Zа-яА-ЯёЁ.\\s]+$", message = "Author must contain only letters, spaces and dots")
+    @NotBlank(message = "Имя автора обязательно!")
+    @Pattern(regexp = "^[a-zA-Zа-яА-ЯёЁ.\\s]+$", message = "Поле Автор может содержать только буквы, пробелы и точки!")
     @Column(nullable = false, name = "author")
     private String author;
 
-    @NotBlank(message = "ISBN is required")
-    @Pattern(regexp = "^(\\d{10}|\\d{13})$", message = "ISBN must contain exactly 10 or 13 digits")
+    @NotBlank(message = "Поле ISBN обязательно!")
+    @Pattern(regexp = "^(\\d{10}|\\d{13})$", message = "Поле ISBN может содержать 10 или 13 цифр")
     @Column(nullable = false, name = "isbn")
     private String isbn;
 
     @Column(nullable = false, name = "available")
     private boolean available = true;
-
 
 }

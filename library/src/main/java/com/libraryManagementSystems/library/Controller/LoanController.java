@@ -67,21 +67,4 @@ public class LoanController {
         return "redirect:/loans";
     }
 
-//    @GetMapping("/loans")
-//    public String getLoans(@RequestParam(required = false) String keyword, Model model) {
-//
-//        List<Loan> loans;
-//
-//        if (keyword != null && !keyword.trim().isEmpty()) {
-//            loans = loanService.searchLoan(keyword);
-//        } else {
-//            loans = loanService.getAllLoans();
-//        }
-//
-//        model.addAttribute("loans", loans);
-//        model.addAttribute("keyword", keyword);
-//
-//        return "loans";
-//    }
-
 }

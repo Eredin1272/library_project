@@ -32,7 +32,7 @@ public class ReaderService {
         return readerRepository.save(reader);
     }
 
-    @Transactional
+    @Transactional // Все или ничего (Читатель удалится и в таблице с выдачами и в таблице с читателями)
     public void deleteReader(Long id) {
 
         if (!loanRepository.findByReaderIdAndReturnDateIsNull(id).isEmpty()) {

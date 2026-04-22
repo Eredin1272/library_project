@@ -17,16 +17,16 @@ public class Reader {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "Name is required")
-    @Pattern(regexp = "^[a-zA-Zа-яА-ЯёЁ\\s]+$", message = " Имя читателя должно содержать только буквы")
+    @NotBlank(message = "Имя читателя обязательно!")
+    @Pattern(regexp = "^[a-zA-Zа-яА-ЯёЁ\\s]+$", message = " Имя читателя должно содержать только буквы!")
     @Column(nullable = false, name = "name")
     private String name;
 
-    @NotBlank(message = "Email is required")
+    @NotBlank(message = "Email обязателен!")
     @Column(nullable = false, name = "email")
     private String email;
 
-    @NotBlank(message = "Phone is required")
+    @NotBlank(message = "Номер телефона обязателен!")
     @Pattern(regexp = "^\\+373\\d{8}$", message = " Ошибка: Неверный формат телефона (+373XXXXXXXX)")
     @Column(nullable = false, name = "phone")
     private String phone;

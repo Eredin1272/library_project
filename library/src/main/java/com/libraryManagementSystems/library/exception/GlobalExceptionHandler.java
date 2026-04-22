@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class GlobalExceptionHandler {
 
 
+    // Book
     @ExceptionHandler(BookNotFoundException.class)
     public String handleBookNotFound(BookNotFoundException ex, Model model) {
         model.addAttribute("errorMessage", ex.getMessage());
@@ -15,6 +16,7 @@ public class GlobalExceptionHandler {
         return "error";
     }
 
+    // Global
     @ExceptionHandler(Exception.class)
     public String handleGeneral(Exception ex, Model model) {
         model.addAttribute("errorMessage", "Что-то пошло не так: " + ex.getMessage());
